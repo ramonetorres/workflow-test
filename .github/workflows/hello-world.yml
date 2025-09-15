@@ -20,6 +20,9 @@ jobs:
 
       - uses: ruby/setup-ruby@v1
         with:
+          ruby-version: 3.4
+          rubygems: "latest"
+          bundler: "latest"
           bundler-cache: true
 
       - name: Execute ruby command
