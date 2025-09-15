@@ -15,8 +15,12 @@ jobs:
     timeout-minutes: 10
   
     steps:
-        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        - uses: actions/checkout@v4
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
 
-        - name: Execute ruby command
-          run: ruby ruby print-hello.rb
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Execute ruby command
+        run: ruby ruby print-hello.rb
