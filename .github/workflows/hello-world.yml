@@ -1,6 +1,7 @@
 name: 'print hello'
+run-name: GitHub Actions Review
 
-on:
+on: # for specific triggers
   push:
     branches:
       - main
@@ -10,20 +11,23 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  build:
-    runs-on: ubuntu-24.04
+  build: # this can be another name for the job, it's for specific purpose
+    runs-on: ubuntu-24.04 # specifi runner
     timeout-minutes: 10
   
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - name: Checkout # the name it is optional
+        uses: actions/checkout@v4
 
-      - uses: ruby/setup-ruby@v1
+      - name: Ruby setup
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.4
           rubygems: "latest"
           bundler: "latest"
           bundler-cache: true
 
+      - name: Define username var
+        run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
       - name: Execute ruby command
-        run: ruby print-hello.rb
+        run: ruby print_hello.rb
